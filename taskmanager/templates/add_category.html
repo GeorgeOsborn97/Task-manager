@@ -7,7 +7,7 @@
     <form class="col s12" method="POST" action="{{ url_for('add_category') }}">
       <div class="row">
         <div class="input-field col s12">
-          <input placeholder="Placeholder" name="category_name" id="category_name" type="text" class="validate" min-length="3" min-length="25" required>
+          <input placeholder="Placeholder" name="category_name" id="category_name" type="text" class="validate" min-length="3" max-length="25" required>
           <label for="category_name">Category Name</label>
         </div>
       </div>

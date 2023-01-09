@@ -1,6 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h3>Hello</h3> 
+<h3 class="light-blue-text text-darken-4 center-align">Tasks</h3>
 
+<div class="row">
+    <div class="col s12 center-align">
+        <a href="{{ url_for('add_task') }}" class="btn-large light-blue darken-2">
+            Add Task
+        </a>
+    </div>
+</div>
+<ul class="collapsible">
+    {% for task in tasks%}
+    <li>
+        <div class="collapsible-header card light-blue darken-1 center-align">
+            <strong>{{task.task_name}}</strong> : {{ task.due_date }} : 
+            {% if task.is_urgent == True %}
+            <i class="material-icons">alarm_on</i>
+            {% endif %}
+        </div>
+        <div class="collapsible-body card light-grey darken-1 center-align">
+            {{ task.category }}
+            <p>{{task.task_description}}</p>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}
