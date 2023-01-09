@@ -11,7 +11,7 @@
     </div>
 </div>
 <ul class="collapsible">
-    {% for task in tasks%}
+    {% for task in tasks|sort(attribute="due_date") %}
     <li>
         <div class="collapsible-header card light-blue darken-1 center-align">
             <strong>{{task.task_name}}</strong> : {{ task.due_date }} : 
