@@ -1,20 +1,67 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h3 class="light-blue-text text-darken-4 center-align">Edit Tasks</h3>
-
+<h3 class="light-blue-text text-darken-4 center-align">Edit Task</h3>
 <div class="row card-panel grey lighten-5">
-    <form class="col s12" method="POST" action="{{ url_for('edit_task', task_id=task.id) }}">
+    <form class="col s12" method="POST" action="{{ url_for('edit_task') }}">
+    <!--Task name-->
       <div class="row">
         <div class="input-field col s12">
-          <input placeholder="Placeholder" name="task_name" value="{{ task.task_name }}" id="task_name" type="text" class="validate" min-length="3" min-length="25" required>
+          <input placeholder="Placeholder" name="task_name" id="task_name" type="text" value="{{ task.task_name }}" class="validate" min-length="3" max-length="50" required>
           <label for="task_name">Task Name</label>
         </div>
       </div>
+      <!--Task desc-->
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea placeholder="Placeholder" name="task_description" id="task_description" type="text" value="{{- task.task_description -}}" class="materialize-textarea validate" min-length="3" max-length="200" required></textarea>
+          <label for="task_description">Task Description</label>
+        </div>
+      </div>
+      <!--Due date-->
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Placeholder" name="due_date" id="due_date" type="text" value="{{ task.due_date }}" class="datepicker validate" required>
+          <label for="due_date">Due Date</label>
+        </div>
+      </div>
+       <!--is urgent-->
+       <div class="row">
+        <div class="input-field col s12">
+            <div class="switch">
+                <label for="is_urgent">
+                    {% if task.is_urgent == True %}
+                        <input id="is_urgent" name="is_urgent" type="checkbox" checked>
+                    {% else %}
+                    <input id="is_urgent" name="is_urgent" type="checkbox">
+                    {% endif %}
+                  <span class="lever"></span>
+                  Is Urgent
+                </label>
+              </div>
+        </div>
+      </div>
+      <!--category id-->
+      <div class="row">
+        <div class="input-field col s12">
+          <select name="category_id" id="category_id" class="validate" value="{{ category.category_name }}" required>
+            <option value="" disabled>Choose Category</option>
+            {% for category in categories %}
+                {% if category == task.category %}
+                    <option value="{{ category.id }}" selected>{{ category.category_name }}</option>
+                {% else %}
+                    <option value="{{ category.id }}">{{ category.category_name }}</option>
+                {% endif %}
+            {% endfor %}
+          </select>
+          <label for="category_id">Category</label>
+        </div>
+      </div>
+      <!--submit-->
       <div class="row">
         <div class="col s12 center-align">
             <button class="submit" class="btn-large light-blue darken-1">
-                Edit Task
+                Add task
             </button>
         </div>
       </div>
