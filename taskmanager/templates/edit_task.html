@@ -44,7 +44,7 @@
       <!--category id-->
       <div class="row">
         <div class="input-field col s12">
-          <select name="category_id" id="category_id" class="validate" value="{{ category.category_name }}" required>
+          <select name="category_id" id="category_id" class="validate" required>
             <option value="" disabled>Choose Category</option>
             {% for category in categories %}
                 {% if category == task.category %}
